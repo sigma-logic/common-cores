@@ -2,6 +2,7 @@
 .nvim
 
 # Gowin EDA
+tmp
 src
 *.gprj.user
 impl
