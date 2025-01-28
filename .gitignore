@@ -1,3 +1,10 @@
 # NeoVim
 .nvim
 
+# Gowin EDA
+src
+*.gprj.user
+impl
+
+# Gowiners
+.gowin

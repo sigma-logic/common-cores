@@ -1,0 +1,5 @@
+IO_PORT "rst_n" PULL_MODE=NONE;
+IO_LOC  "rst_n" K16;
+
+IO_PORT "strip" IO_TYPE=LVCMOS33 DRIVE=8 BANK_VCCIO=3.3;
+IO_LOC  "strip" H16;

@@ -1,0 +1,13 @@
+<?xml version="1" encoding="UTF-8"?>
+<!DOCTYPE gowin-fpga-project>
+<Project>
+    <Template>FPGA</Template>
+    <Version>5</Version>
+    <Device name="GW5AST-138C" pn="GW5AST-LV138FPG676AC1/I0">gw5ast138c-003</Device>
+    <FileList>
+        <File path="/home/limpix/hardware_design/common_cores_w/cores/ws2812/ws2812.sv" type="file.verilog" enable="1"/>
+        <File path="top.sv" type="file.verilog" enable="1"/>
+        <File path="phy.cst" type="file.cst" enable="1"/>
+        <File path="timings.sdc" type="file.sdc" enable="1"/>
+    </FileList>
+</Project>
