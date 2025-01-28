@@ -1,0 +1,2 @@
+../cores/rgmii/rgmii_tx.sv
+../cores/rgmii/rgmii_tx_pll.sv
