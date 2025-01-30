@@ -140,27 +140,27 @@ module simple_pll #(
         .DYN_LPF_SEL("FALSE")
     ) u_pll (
 `ifdef SIMPLE_PLL_LOCK
-        .LOCK(lock)
+        .LOCK(lock),
 `else
         .LOCK(sink[0]),
 `endif
 `ifdef SIMPLE_PLL_CLK_0
-        .CLKOUT0(out_clk_0)
+        .CLKOUT0(out_clk_0),
 `else
         .CLKOUT0(sink[1]),
 `endif
 `ifdef SIMPLE_PLL_CLK_1
-        .CLKOUT1(out_clk_1)
+        .CLKOUT1(out_clk_1),
 `else
         .CLKOUT1(sink[2]),
 `endif
 `ifdef SIMPLE_PLL_CLK_2
-        .CLKOUT2(out_clk_1)
+        .CLKOUT2(out_clk_1),
 `else
         .CLKOUT2(sink[3]),
 `endif
 `ifdef SIMPLE_PLL_CLK_3
-        .CLKOUT3(out_clk_1)
+        .CLKOUT3(out_clk_1),
 `else
         .CLKOUT3(sink[4]),
 `endif
@@ -171,10 +171,10 @@ module simple_pll #(
         .CLKIN(ref_clk),
         .CLKFB(gw_gnd),
 `ifdef SIMPLE_PLL_RESET
-        .RESET(rst)
+        .RESET(rst),
 `else
-        .RESET(1'b0)
-`endif,
+        .RESET(1'b0),
+`endif
         .PLLPWD(gw_gnd),
         .RESET_I(gw_gnd),
         .RESET_O(gw_gnd),
