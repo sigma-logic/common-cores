@@ -1,38 +1,29 @@
 // Copyright (c) 2025 Sigma Logic
 `default_nettype none
 
-module simple_pll #(
-    parameter string RefClkMhz = "70",
-    parameter int IDivSel = 1,
-    parameter int MDivSel = 25,
-    parameter int ODiv0Sel = 8,
-    parameter int ODiv1Sel = 8,
-    parameter int ODiv2Sel = 8,
-    parameter int ODiv3Sel = 8,
-    parameter bit Clk0En = 1,
-    parameter bit Clk1En = 0,
-    parameter bit Clk2En = 0,
-    parameter bit Clk3En = 0
+module simple_pll
+    import simple_pll_pkg::pll_cfg_t;
+    import simple_pll_pkg::pll_channels_t;
+#(
+    parameter pll_cfg_t Cfg = '{"70", 1, 25, 8, 8, 8, 8, 1, 0, 0, 0},
+
+    parameter string RefClkMhz = Cfg.ref_clk_mhz,
+    parameter int IDiv = Cfg.i_div,
+    parameter int MDiv = Cfg.m_div,
+    parameter int ODiv0 = Cfg.o_div_0,
+    parameter int ODiv1 = Cfg.o_div_1,
+    parameter int ODiv2 = Cfg.o_div_2,
+    parameter int ODiv3 = Cfg.o_div_3,
+    parameter bit Clk0En = Cfg.clk_0_en,
+    parameter bit Clk1En = Cfg.clk_1_en,
+    parameter bit Clk2En = Cfg.clk_2_en,
+    parameter bit Clk3En = Cfg.clk_3_en
 ) (
-`ifdef SIMPLE_PLL_RESET
-    input  logic rst,
-`endif
-`ifdef SIMPLE_PLL_LOCK
+    input logic ref_clk,
+    input logic rst,
+
     output logic lock,
-`endif
-`ifdef SIMPLE_PLL_CLK_0
-    output logic out_clk_0,
-`endif
-`ifdef SIMPLE_PLL_CLK_1
-    output logic out_clk_1,
-`endif
-`ifdef SIMPLE_PLL_CLK_2
-    output logic out_clk_2,
-`endif
-`ifdef SIMPLE_PLL_CLK_3
-    output logic out_clk_3,
-`endif
-    input  logic ref_clk
+    output pll_channels_t channels
 );
 
     logic gw_vcc;
@@ -41,20 +32,20 @@ module simple_pll #(
     assign gw_vcc = 1'b1;
     assign gw_gnd = 1'b0;
 
-    logic [8:0] sink;
+    logic [3:0] sink;
 
     PLL #(
         .FCLKIN(RefClkMhz),
-        .IDIV_SEL(IDivSel),
+        .IDIV_SEL(IDiv),
         .FBDIV_SEL(1),
-        .ODIV0_SEL(ODiv0Sel),
-        .ODIV1_SEL(ODiv1Sel),
-        .ODIV2_SEL(ODiv2Sel),
-        .ODIV3_SEL(ODiv3Sel),
+        .ODIV0_SEL(ODiv0),
+        .ODIV1_SEL(ODiv1),
+        .ODIV2_SEL(ODiv2),
+        .ODIV3_SEL(ODiv3),
         .ODIV4_SEL(8),
         .ODIV5_SEL(8),
         .ODIV6_SEL(8),
-        .MDIV_SEL(25),
+        .MDIV_SEL(MDiv),
         .MDIV_FRAC_SEL(0),
         .ODIV0_FRAC_SEL(0),
         .CLKOUT0_EN(Clk0En ? "TRUE" : "FALSE"),
@@ -139,42 +130,18 @@ module simple_pll #(
         .DYN_ICP_SEL("FALSE"),
         .DYN_LPF_SEL("FALSE")
     ) u_pll (
-`ifdef SIMPLE_PLL_LOCK
         .LOCK(lock),
-`else
-        .LOCK(sink[0]),
-`endif
-`ifdef SIMPLE_PLL_CLK_0
-        .CLKOUT0(out_clk_0),
-`else
-        .CLKOUT0(sink[1]),
-`endif
-`ifdef SIMPLE_PLL_CLK_1
-        .CLKOUT1(out_clk_1),
-`else
-        .CLKOUT1(sink[2]),
-`endif
-`ifdef SIMPLE_PLL_CLK_2
-        .CLKOUT2(out_clk_1),
-`else
-        .CLKOUT2(sink[3]),
-`endif
-`ifdef SIMPLE_PLL_CLK_3
-        .CLKOUT3(out_clk_1),
-`else
-        .CLKOUT3(sink[4]),
-`endif
-        .CLKOUT4(sink[5]),
-        .CLKOUT5(sink[6]),
-        .CLKOUT6(sink[7]),
-        .CLKFBOUT(sink[8]),
+        .CLKOUT0(channels.clk_0),
+        .CLKOUT1(channels.clk_1),
+        .CLKOUT2(channels.clk_2),
+        .CLKOUT3(channels.clk_3),
+        .CLKOUT4(sink[0]),
+        .CLKOUT5(sink[1]),
+        .CLKOUT6(sink[2]),
+        .CLKFBOUT(sink[3]),
         .CLKIN(ref_clk),
         .CLKFB(gw_gnd),
-`ifdef SIMPLE_PLL_RESET
         .RESET(rst),
-`else
-        .RESET(1'b0),
-`endif
         .PLLPWD(gw_gnd),
         .RESET_I(gw_gnd),
         .RESET_O(gw_gnd),

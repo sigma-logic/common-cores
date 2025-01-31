@@ -1,1 +1,2 @@
+../cores/simple_pll/simple_pll_pkg.sv
 ../cores/simple_pll/simple_pll.sv
