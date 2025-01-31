@@ -1,0 +1,2 @@
+../cores/lvds/lvds_pkg.sv
+../cores/lvds/lvds_out.sv
