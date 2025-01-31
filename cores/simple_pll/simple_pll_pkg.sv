@@ -2,7 +2,7 @@
 
 package simple_pll_pkg;
 
-    typedef struct packed {
+    typedef struct {
         string ref_clk_mhz;
         int i_div;
         int m_div;
@@ -23,4 +23,4 @@ package simple_pll_pkg;
         logic clk_3;
     } pll_channels_t;
 
-endpackage
+endpackage : simple_pll_pkg

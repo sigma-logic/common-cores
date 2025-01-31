@@ -1,5 +1,4 @@
 // Copyright (c) 2025 Sigma Logic
-`default_nettype none
 
 module simple_pll
     import simple_pll_pkg::pll_cfg_t;

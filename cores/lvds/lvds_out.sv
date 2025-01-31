@@ -1,5 +1,4 @@
 // Copyright (c) 2025 Sigma Logic
-`default_nettype none
 
 module lvds_out
     import lvds_pkg::pair_t;
