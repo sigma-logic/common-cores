@@ -12,6 +12,7 @@ please mention original [repository](https://github.com/sigma-logic/common-cores
 |[WS2812](https://github.com/sigma-logic/common-cores/tree/main/cores/ws2812)        |Addressable RGB led driver           |New (unstable)|Supports only single LED
 |[RGMII](https://github.com/sigma-logic/common-cores/tree/main/cores/rgmii)          |RGMII phy level                      |WiP (unstable)|Network stack up to you, it's only DDR buffer
 |[Simple PLL](https://github.com/sigma-logic/common-cores/tree/main/cores/simple_pll)|PLL configuration covering most needs|Stable        |Just cozy PLL module
+|[LVDS](https://github.com/sigma-logic/common-cores/tree/main/cores/lvds)            |LVDS I/O buffers                    |Stable        |Wrapper around ELVDS/TLVDS
 ---
 ###### [Telegram](https://t.me/limpix31), [Sigma Logic Discord Server](https://discord.gg/HPJJsenZ76)
 
